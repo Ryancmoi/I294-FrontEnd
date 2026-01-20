@@ -7,10 +7,15 @@ const app = Vue.createApp({
   },
   methods: {
     updateCart(id) {
-      this.cart.push(id);
+      console.log(`Parent ${id}`);
+      if (id) {
+        this.cart.push(id);
+      } else {
+        console.log(`ERROR PAS ID`);
+      }
     },
-    removeCart(id) {
-      this.cart.pop(id);
+    removeCart() {
+      this.cart.pop();
     },
   },
 });

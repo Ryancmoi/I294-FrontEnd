@@ -72,10 +72,12 @@ app.component("product-display", {
   },
   methods: {
     addToCart() {
-      this.$emit("add-to-cart", this.variants[this.selectedVariant].id);
+      const id = this.variants[this.selectedVariant].id;
+      console.log(`Enfant ${id}`);
+      this.$emit("add-to-cart", id);
     },
     removeFromCart() {
-      this.$emit("remove-from-cart", this.variants[this.selectedVariant].id);
+      this.$emit("remove-from-cart");
     },
     updateVariant(index) {
       this.selectedVariant = index;
