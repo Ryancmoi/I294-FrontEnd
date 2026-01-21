@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Import Vue-->
+    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="./style.css" />
+
+    <title>Application Gadget</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{ title }}</h1>
+      <p>{{description}}</p>
+      <div class="gadget">
+        <img :src="gadget.phone.image" />
+        <h2>{{gadget.phone.nom}}</h2>
+        <p>{{gadget.phone.prix}}</p>
+      </div>
+    </div>
+    <!-- Import Js -->
+    <script src="./main.js"></script>
+
+    <script>
+      const mountedApp = app.mount("#app");
+    </script>
+  </body>
+</html>
