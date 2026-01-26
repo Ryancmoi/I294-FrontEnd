@@ -38,25 +38,14 @@
       </div>
 
       <div class="gadget-container">
-        <div class="gadget" v-for="gadget in gadgets" :key="gadget.id">
-          <img :src="gadget.image" />
-          <h2>{{ gadget.name }}</h2>
-          <p>{{ gadget.price }}</p>
-          <p v-if="gadget.inStock">✅ En stock</p>
-          <p v-else>❌ Rupture de stock</p>
-          <button
-            class="button"
-            :disabled="!gadget.inStock"
-            @click="addToCart(gadget); cartTotal()"
-          >
-            Ajouter au panier
-          </button>
+       <gadget-display :gadget="gadget" v-for="gadget in gadgets" @add-to-cart="addToCart"></gadget-display>
         </div>
       </div>
     </div>
 
     <!-- Import Js -->
     <script src="./main.js"></script>
+    <script src="./components/GadgetDisplay.js"></script>
 
     <script>
       const mountedApp = app.mount("#app");
