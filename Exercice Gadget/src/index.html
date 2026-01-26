@@ -14,13 +14,47 @@
   <body>
     <div id="app">
       <h1>{{ title }}</h1>
-      <p>{{description}}</p>
-      <div class="gadget">
-        <img :src="gadget.phone.image" />
-        <h2>{{gadget.phone.nom}}</h2>
-        <p>{{gadget.phone.prix}}</p>
+      <p>{{ description }}</p>
+
+      <div class="cart">
+        <h2>🛒 Mon Panier {{ cart.length }}</h2>
+        <ul>
+          <li v-for="(gadget, index) in cart" :key="index">
+            <p>{{ gadget.name }} - {{ gadget.price }}</p>
+            <button class="remove-btn" @click="removeFromCart(index)">
+              ❌
+            </button>
+          </li>
+        </ul>
+        <p v-if="cart.length===0">Votre panier est vide.</p>
+        <h3>
+          💰 Total :
+          <span v-if="discountedTotal < cartTotal">
+            <s>{{ cartTotal }}€</s> ➝
+            <strong>{{ discountedTotal.toFixed(2) }}€ (-10%)</strong>
+          </span>
+          <span v-else> {{ cartTotal }}€ </span>
+        </h3>
+      </div>
+
+      <div class="gadget-container">
+        <div class="gadget" v-for="gadget in gadgets" :key="gadget.id">
+          <img :src="gadget.image" />
+          <h2>{{ gadget.name }}</h2>
+          <p>{{ gadget.price }}</p>
+          <p v-if="gadget.inStock">✅ En stock</p>
+          <p v-else>❌ Rupture de stock</p>
+          <button
+            class="button"
+            :disabled="!gadget.inStock"
+            @click="addToCart(gadget); cartTotal()"
+          >
+            Ajouter au panier
+          </button>
+        </div>
       </div>
     </div>
+
     <!-- Import Js -->
     <script src="./main.js"></script>
 
