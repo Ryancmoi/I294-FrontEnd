@@ -9,32 +9,41 @@ const app = Vue.createApp({
         {
           id: 1,
           name: "Smartphone XZ",
-          price: "799€",
+          price: 799,
           image: "./assets/phone.jpg",
           inStock: true,
+          quantity: 0,
         },
         {
           id: 2,
           name: "Laptop Pro",
-          price: "1299€",
+          price: 1299,
           image: "./assets/laptop.jpg",
           inStock: false,
+          quantity: 0,
         },
         {
           id: 3,
           name: "Ecouteurs Bluetooth",
-          price: "199€",
+          price: 199,
           image: "./assets/earbuds.jpg",
           inStock: true,
+          quantity: 0,
         },
       ],
     };
   },
   methods: {
     addToCart(gadget) {
-      this.cart.push(gadget);
+      if (gadget.quantity == 0) {
+        this.cart.push(gadget);
+        gadget.quantity += 1;
+      } else {
+        gadget.quantity += 1;
+      }
     },
     removeFromCart(index) {
+      this.cart[index].quantity = 0;
       this.cart.splice(index, 1);
     },
   },
@@ -42,7 +51,7 @@ const app = Vue.createApp({
     cartTotal() {
       let total = 0;
       for (let i = 0; i < this.cart.length; i++) {
-        total += Number(this.cart[i].price.replace("€", ""));
+        total += this.cart[i].price;
       }
       return total;
     },

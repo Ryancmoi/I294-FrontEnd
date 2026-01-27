@@ -16,36 +16,26 @@
       <h1>{{ title }}</h1>
       <p>{{ description }}</p>
 
-      <div class="cart">
-        <h2>🛒 Mon Panier {{ cart.length }}</h2>
-        <ul>
-          <li v-for="(gadget, index) in cart" :key="index">
-            <p>{{ gadget.name }} - {{ gadget.price }}</p>
-            <button class="remove-btn" @click="removeFromCart(index)">
-              ❌
-            </button>
-          </li>
-        </ul>
-        <p v-if="cart.length===0">Votre panier est vide.</p>
-        <h3>
-          💰 Total :
-          <span v-if="discountedTotal < cartTotal">
-            <s>{{ cartTotal }}€</s> ➝
-            <strong>{{ discountedTotal.toFixed(2) }}€ (-10%)</strong>
-          </span>
-          <span v-else> {{ cartTotal }}€ </span>
-        </h3>
-      </div>
+      <cart-display
+        :cart="cart"
+        :cart-total="cartTotal"
+        :discounted-total="discountedTotal"
+        @remove-from-cart="removeFromCart()"
+      ></cart-display>
 
       <div class="gadget-container">
-       <gadget-display :gadget="gadget" v-for="gadget in gadgets" @add-to-cart="addToCart"></gadget-display>
-        </div>
+        <gadget-display
+          :gadget="gadget"
+          v-for="gadget in gadgets"
+          @add-to-cart="addToCart"
+        ></gadget-display>
       </div>
     </div>
 
     <!-- Import Js -->
     <script src="./main.js"></script>
     <script src="./components/GadgetDisplay.js"></script>
+    <script src="./components/CartDisplay.js"></script>
 
     <script>
       const mountedApp = app.mount("#app");
